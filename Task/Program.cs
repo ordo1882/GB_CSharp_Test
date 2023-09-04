@@ -4,68 +4,76 @@
 // лучше обойтись исключительно массивами.
 
 Console.Write("Enter the size of array: ");
-int n = Convert.ToInt32(Console.ReadLine());
+int n = Convert.ToInt32(Console.ReadLine()); // Запрашиваем размер массива от пользователя.
 
-string[] source_array = new string[n];
+string[] source_array = new string[n]; // Создаем исходный массив строк.
 
-int new_array_size = 0;
+int new_array_size = 0; // Определяем размер будущего массива по умолчанию.
 
-Console.WriteLine("Enter your array:");
-
-string[] FillArray(string[] array)
+string[] FillArray(string[] array) // Реализация метода заполнения исходного массива.
 {
     for (int i = 0; i < array.Length; ++i)
     {
-        array[i] = Console.ReadLine();
-        if (array[i].Length == 0)
+        array[i] = Console.ReadLine(); // Запрашиваем ввод строк от пользователя.
+
+        if (array[i].Length == 0) // Проверка на пустую строку.
         {
             bool no_validate = true;
+
             while (no_validate)
             {
                 Console.WriteLine("String value can't be empty. Try again:");
+
                 array[i] = Console.ReadLine();
+
                 if (array[i].Length > 0)
                 {
                     no_validate = false;
                 }
             }
         }
-        if (array[i].Length <= 3)
+
+        if (array[i].Length <= 3) // Если новое значение больше 3-х символов, то увеличиваем размер будущего массива на 1.
         {
             ++new_array_size;
         }
     }
+
     return array;
 }
 
-FillArray(source_array);
+Console.WriteLine("Enter your array:");
+FillArray(source_array); // Вызов метода заполнения исходного массива.
 
-string[] new_array = new string[new_array_size];
+string[] new_array = new string[new_array_size]; // Создаем новый массив.
 
-string[] GetNewArray(string[] array)
+string[] GetNewArray(string[] array) // Реализация метода заполнения нового массива.
 {
     int j = 0;
+
     for (int i = 0; i < source_array.Length; ++i)
     {
-        if (source_array[i].Length <= 3)
+        if (source_array[i].Length <= 3) // Если элемент не больше 3-х символов, то определяем его в новый массив.
         {
             array[j] = source_array[i];
             ++j;
         }
     }
+
     return array;
 }
 
-GetNewArray(new_array);
+GetNewArray(new_array); // Вызов метода заполнения нового массива.
 
-string[] PrintArray(string[] array)
+string[] PrintArray(string[] array) // Реализация метода вывода массива.
 {
     for (int i = 0; i < array.Length; ++i)
     {
         Console.Write(array[i] + " ");
     }
+
     return array;
 }
 
 Console.Write("New array is: ");
-PrintArray(new_array);
+PrintArray(new_array); // Вызов метода вывода массива.
