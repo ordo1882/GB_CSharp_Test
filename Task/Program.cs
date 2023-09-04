@@ -10,24 +10,62 @@ string[] source_array = new string[n];
 
 int new_array_size = 0;
 
-for (int i = 0; i < source_array.Length; ++i)
+Console.WriteLine("Enter your array:");
+
+string[] FillArray(string[] array)
 {
-    source_array[i] = Console.ReadLine();
-    if (source_array[i].Length <= 3)
+    for (int i = 0; i < array.Length; ++i)
     {
-        ++new_array_size;
+        array[i] = Console.ReadLine();
+        if (array[i].Length == 0)
+        {
+            bool no_validate = true;
+            while (no_validate)
+            {
+                Console.WriteLine("String value can't be empty. Try again:");
+                array[i] = Console.ReadLine();
+                if (array[i].Length > 0)
+                {
+                    no_validate = false;
+                }
+            }
+        }
+        if (array[i].Length <= 3)
+        {
+            ++new_array_size;
+        }
     }
+    return array;
 }
 
-string[] new_array = new string[new_array_size - 1];
+FillArray(source_array);
 
-for (int i = 0; i < source_array.Length; ++i)
+string[] new_array = new string[new_array_size];
+
+string[] GetNewArray(string[] array)
 {
     int j = 0;
-    if (source_array[i].Length <= 3)
+    for (int i = 0; i < source_array.Length; ++i)
     {
-        new_array[j] = source_array[i];
-        Console.Write(new_array[j] + " ");
-        ++j;
+        if (source_array[i].Length <= 3)
+        {
+            array[j] = source_array[i];
+            ++j;
+        }
     }
+    return array;
 }
+
+GetNewArray(new_array);
+
+string[] PrintArray(string[] array)
+{
+    for (int i = 0; i < array.Length; ++i)
+    {
+        Console.Write(array[i] + " ");
+    }
+    return array;
+}
+
+Console.Write("New array is: ");
+PrintArray(new_array);
